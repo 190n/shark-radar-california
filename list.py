@@ -4,7 +4,7 @@ import requests
 
 with open("stores.json", encoding='utf-8') as f:
     # Parsed from (search for "allStores=["):
-    # https://www.ikea.com/de/de/products/javascripts/range-stockcheck.422cfd6afe912b35d7b3.js
+    # https://www.ikea.com/us/en/products/javascripts/range-stockcheck.961382cd6f9231488e60.js
     stores = json.load(f)
 
 
@@ -71,7 +71,7 @@ def main():
 
     print("Fetching BLÅHAJ listings…\n")
 
-    availabilities = requests.get("https://api.ingka.ikea.com/cia/availabilities/ru/de?itemNos=30373588&expand=StoresList,Restocks,SalesLocations", headers={
+    availabilities = requests.get("https://api.ingka.ikea.com/cia/availabilities/ru/us?itemNos=90373590&expand=StoresList,Restocks,SalesLocations", headers={
         "Accept": "application/json;version=2",
         "X-Client-ID": "b6c117e5-ae61-4ef5-b4cc-e0b1e37f0631"
     })
