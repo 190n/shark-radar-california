@@ -3,6 +3,7 @@ import requests
 from jinja2 import Template
 from datetime import datetime
 import time
+import pytz
 
 with open("stores.json", encoding='utf-8') as f:
     # Parsed from (search for "allStores=["):
@@ -85,7 +86,9 @@ def main():
         template = Template(template_file.read())
         now = datetime.utcnow()
         iso_time = now.isoformat(timespec='milliseconds') + 'Z'
-        local_time = f'{datetime.today().strftime("%Y-%m-%d %I:%M:%S %p")} {time.strftime("%Z")}'
+        pacific_time = pytz.timezone('America/Los_Angeles')
+        local_datetime = datetime.today().astimezone(pacific_time)
+        local_time = f'{local_datetime.strftime("%Y-%m-%d %I:%M:%S %p")} {pacific_time.tzname(datetime.today())}'
         print(template.render(
             iso_time=iso_time,
             local_time=local_time,
