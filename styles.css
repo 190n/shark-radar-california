@@ -7,6 +7,7 @@ html {
 	--bg-trans: #ffffffc0;
 	--stocked: #40ff4080;
 	--font: 'Courier Prime', 'Courier New', Courier, monospace;
+	--link: blue;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -15,6 +16,7 @@ html {
 		--bg: #222;
 		--bg-trans: #222222e0;
 		--stocked: #40ff4040;
+		--link: #60b0ff;
 	}
 }
 
@@ -101,4 +103,8 @@ tr.stocked {
 	position: absolute;
 	bottom: -2px;
 	right: -2px;
+}
+
+a, a:visited {
+	color: var(--link);
 }
