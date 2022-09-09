@@ -36,37 +36,8 @@ def calculate_stock(availability):
 	}
 
 
-def pretty_print_stock(stock):
-	store = stock['store']
-	quantity = stock['quantity']
-	next_restock = stock['next_restock']
-
-	s = ''
-	s += store
-	s += colorama.Fore.RESET
-	s += ' '
-	s += str(quantity)
-
-	if next_restock is not None:
-		# s += colorama.Fore.LIGHTBLACK_EX
-		s += ' (restock of '
-		# s += colorama.Fore.RESET
-		s += str(next_restock['quantity'])
-		# s += colorama.Fore.LIGHTBLACK_EX
-		s += ' coming '
-		# s += colorama.Fore.RESET
-		s += next_restock['earliestDate']
-		s += ' ~ '
-		s += next_restock['latestDate']
-		# s += colorama.Fore.LIGHTBLACK_EX
-		s += ')'
-		# s += colorama.Fore.RESET
-
-	print(s)
-
-
-def main():
-	availabilities = requests.get('https://api.ingka.ikea.com/cia/availabilities/ru/us?itemNos=90373590&expand=StoresList,Restocks,SalesLocations', headers={
+def get_availabilities(item_id):
+	availabilities = requests.get(f'https://api.ingka.ikea.com/cia/availabilities/ru/us?itemNos={item_id}&expand=StoresList,Restocks,SalesLocations', headers={
 		'Accept': 'application/json;version=2',
 		'X-Client-ID': 'b6c117e5-ae61-4ef5-b4cc-e0b1e37f0631'
 	})
@@ -81,7 +52,14 @@ def main():
 	# sort by number in stock; stores with the same stock are sorted by closest restock
 	sharks.sort(key=lambda s: s['next_restock']['earliestDate'] if s['next_restock'] else 'z')
 	sharks.sort(key=lambda s: s['quantity'], reverse=True)
+	return sharks
 
+blåhaj_item_id = '90373590'
+smolhaj_item_id = '70540665'
+
+def main():
+	blåhaj = get_availabilities(blåhaj_item_id)
+	smolhaj = get_availabilities(smolhaj_item_id)
 	with open('template.html') as template_file:
 		template = Template(template_file.read())
 		now = datetime.utcnow()
@@ -92,7 +70,8 @@ def main():
 		print(template.render(
 			iso_time=iso_time,
 			local_time=local_time,
-			sharks=sharks,
+			blåhaj=blåhaj,
+			smolhaj=smolhaj,
 		))
 
 

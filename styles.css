@@ -6,6 +6,7 @@ html {
 	--bg: white;
 	--bg-trans: #ffffffc0;
 	--stocked: #40ff4080;
+	--font: 'Courier Prime', 'Courier New', Courier, monospace;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -25,7 +26,7 @@ body {
 	height: 100%;
 	min-height: 100vh;
 	background-color: var(--bg-trans);
-	font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+	font-family: var(--font);
 	font-size: 24px;
 	color: var(--fg);
 }
@@ -37,6 +38,7 @@ h1 {
 
 table {
 	font-size: 0.75em;
+	width: 100%;
 }
 
 th {
@@ -60,4 +62,43 @@ td:nth-child(2) {
 
 tr.stocked {
 	background-color: var(--stocked);
+}
+
+#tabs button {
+	appearance: none;
+	background: transparent;
+	font-family: var(--font);
+	color: var(--fg);
+	font-size: 24px;
+	padding: 4px;
+	border: solid var(--fg);
+	border-width: 0 0 2px;
+	width: 50%;
+	text-align: center;
+	cursor: pointer;
+}
+
+#tabs button[aria-selected='true'] {
+	border-width: 2px 2px 0;
+	position: relative;
+}
+
+#tabs button[aria-selected='true']::before {
+	content: ' ';
+	background: var(--fg);
+	width: 2px;
+	height: 2px;
+	position: absolute;
+	bottom: -2px;
+	left: -2px;
+}
+
+#tabs button[aria-selected='true']::after {
+	content: ' ';
+	background: var(--fg);
+	width: 2px;
+	height: 2px;
+	position: absolute;
+	bottom: -2px;
+	right: -2px;
 }

@@ -5,34 +5,71 @@
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		<link rel="stylesheet" href="styles.css">
 		<title>Blåhaj Radar</title>
+		<script src="tabs.js"></script>
 	</head>
 	<body>
 		<h1>Blåhaj Radar</h1>
 		<p>Last updated: <time datetime="{{ iso_time }}">{{ local_time }}</time></p>
-		<table cellspacing="0">
-			<thead>
-				<tr>
-					<th>Store</th>
-					<th>Stock</th>
-					<th>Restock</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for shark in sharks %}
-					<tr class="{{ 'stocked' if shark['quantity'] > 0 else '' }}">
-						<td>{{ shark['store'] }}</td>
-						<td>{{ shark['quantity'] }}</td>
-						<td>
-							{% with r = shark['next_restock'] %}
-								{% if r %}
-									<span class="restock-quantity">{{ r['quantity'] }}</span> expected
-									{{ r['earliestDate'] }} &mdash; {{ r['latestDate'] }}
-								{% endif %}
-							{% endwith %}
-						</td>
+		<p id="tabs" role="tablist">
+			<button role="tab" aria-selected="true" aria-controls="blåhaj-panel" id="blåhaj-tab" data-tab="blåhaj" tabindex="0">
+				BLÅHAJ (100cm)
+			</button><button role="tab" aria-selected="false" aria-controls="smolhaj-panel" id="smolhaj-tab" data-tab="smolhaj" tabindex="-1">
+				&ldquo;SMOLHAJ&rdquo; (55cm)
+			</button>
+		</p>
+		<section id="blåhaj-panel" role="tabpanel" tabindex="0" aria-labelledby="blåhaj-tab">
+			<table cellspacing="0">
+				<thead>
+					<tr>
+						<th>Store</th>
+						<th>Stock</th>
+						<th>Restock</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for shark in blåhaj %}
+						<tr class="{{ 'stocked' if shark['quantity'] > 0 else '' }}">
+							<td>{{ shark['store'] }}</td>
+							<td>{{ shark['quantity'] }}</td>
+							<td>
+								{% with r = shark['next_restock'] %}
+									{% if r %}
+										<span class="restock-quantity">{{ r['quantity'] }}</span> expected
+										{{ r['earliestDate'] }} &mdash; {{ r['latestDate'] }}
+									{% endif %}
+								{% endwith %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+		<section id="smolhaj-panel" role="tabpanel" tabindex="0" aria-labelledby="smolhaj-tab" hidden>
+			<table cellspacing="0">
+				<thead>
+					<tr>
+						<th>Store</th>
+						<th>Stock</th>
+						<th>Restock</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for shark in smolhaj %}
+						<tr class="{{ 'stocked' if shark['quantity'] > 0 else '' }}">
+							<td>{{ shark['store'] }}</td>
+							<td>{{ shark['quantity'] }}</td>
+							<td>
+								{% with r = shark['next_restock'] %}
+									{% if r %}
+										<span class="restock-quantity">{{ r['quantity'] }}</span> expected
+										{{ r['earliestDate'] }} &mdash; {{ r['latestDate'] }}
+									{% endif %}
+								{% endwith %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
 	</body>
 </html>
