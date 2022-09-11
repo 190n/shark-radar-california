@@ -19,4 +19,4 @@ Navigate to the folder you've downloaded `cd path/to/shark-radar-california` and
 
 - [Originally](https://git.lavender.software/charlotte/shark-radar) made by [Charlotte Som](https://github.com/videogame-hacker)
 - Modified by [Bastian](https://github.com/basti564) to support german IKEA stores.
-- Modified by [me](https://github.com/190n) and [@blahajessie](https://github.com/blahajessie) to look at stores in California.
+- Modified by [me](https://github.com/190n) and [@blahajjessie](https://github.com/blahajjessie) to look at stores in California.
