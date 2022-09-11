@@ -5,7 +5,9 @@ html {
 	--fg: black;
 	--bg: white;
 	--bg-trans: #ffffffc0;
-	--stocked: #40ff4080;
+	--stocked: #40e04080;
+	--stocked-zebra: #40e04040;
+	--bg-zebra: #ffffff80;
 	--font: 'Courier Prime', 'Courier New', Courier, monospace;
 	--link: blue;
 }
@@ -15,7 +17,9 @@ html {
 		--fg: white;
 		--bg: #222;
 		--bg-trans: #222222e0;
-		--stocked: #40ff4040;
+		--stocked: #40c04040;
+		--stocked-zebra: #40c04060;
+		--bg-zebra: #44444440;
 		--link: #60b0ff;
 	}
 }
@@ -64,6 +68,14 @@ td:nth-child(2) {
 
 tr.stocked {
 	background-color: var(--stocked);
+}
+
+tr.stocked:nth-child(even) {
+	background-color: var(--stocked-zebra);
+}
+
+tr:nth-child(even) {
+	background-color: var(--bg-zebra);
 }
 
 #tabs button {
