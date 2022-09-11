@@ -1,3 +1,5 @@
+// Adapted from MDN:
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Tab_Role#example
 window.addEventListener('DOMContentLoaded', () => {
 	const tabs = document.querySelectorAll('[role="tab"]');
 	const tabList = document.querySelector('[role="tablist"]');
